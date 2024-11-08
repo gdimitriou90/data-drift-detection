@@ -1,0 +1,69 @@
+1. ADWIN (Adaptive Windowing)
+
+Mathematical Foundation:
+ADWIN (Adaptive Windowing) is a data stream change detection algorithm that maintains a dynamic, adaptive window to monitor the data stream’s average. ADWIN’s window automatically expands or contracts based on detected changes in the mean. The window is divided into two sub-windows, and the algorithm tests whether there is a statistically significant difference in the means of these sub-windows.
+
+The test uses a confidence interval based on the Hoeffding inequality, which ensures that with high probability, the true mean lies within the calculated interval. If the two sub-windows have means that differ beyond this interval, ADWIN shrinks the window by dropping older data points, thereby adapting to the new mean.
+
+How it Works:
+	1.	ADWIN splits its window into two sub-windows and continuously checks if the average of these two windows differs beyond a threshold.
+	2.	When a significant difference is detected, it adapts by removing the older elements, making the window smaller.
+	3.	This method is robust for both sudden and gradual changes due to its adaptive nature.
+
+Reference:
+Bifet, A., & Gavaldà, R. (2007). Learning from Time-Changing Data with Adaptive Windowing. In Proceedings of the 2007 SIAM International Conference on Data Mining (pp. 443–448). https://doi.org/10.1137/1.9781611972771.42
+
+2. Page-Hinkley Test
+
+Mathematical Foundation:
+The Page-Hinkley Test is a sequential analysis method that is used to detect changes in the mean of a data stream. This test is based on monitoring the cumulative sum of deviations from the observed mean. When the cumulative deviation surpasses a predefined threshold, it signals a potential change.
+
+How it Works:
+	1.	Calculate the cumulative sum of deviations from the observed mean.
+	2.	Monitor the cumulative deviation, subtracting the minimum cumulative sum encountered so far.
+	3.	When the deviation surpasses a set threshold, drift is detected.
+
+Reference:
+Page, E. S. (1954). Continuous Inspection Schemes. Biometrika, 41(1/2), 100–115. https://doi.org/10.2307/2333009
+
+3. CUSUM (Cumulative Sum Control)
+
+Mathematical Foundation:
+CUSUM (Cumulative Sum Control) is designed to detect shifts in the mean of a data stream by accumulating deviations from a target value. The method is based on calculating a cumulative sum  S_t  which records the cumulative drift from the expected mean.
+
+How it Works:
+	1.	Calculate cumulative sums for positive and negative drifts.
+	2.	Continuously update these sums based on new observations.
+	3.	When either cumulative sum exceeds the threshold, it indicates a drift.
+
+Reference:
+Barnard, G. A. (1959). Control Charts and Stochastic Processes. Journal of the Royal Statistical Society: Series B (Methodological), 21(2), 239–271. https://doi.org/10.1111/j.2517-6161.1959.tb00340.x
+
+4. PCA (Principal Component Analysis)
+
+Mathematical Foundation:
+Principal Component Analysis (PCA) is a dimensionality reduction method that transforms data to a new coordinate system, such that the greatest variance is captured in the first few principal components. In drift detection, PCA monitors changes in the variance structure of the data over time.
+
+How it Works:
+	1.	PCA is applied to a sliding window of data, computing the principal components and explained variance.
+	2.	Changes in the variance structure over time (e.g., a significant change in the first principal component’s variance) indicate drift.
+
+Reference:
+Jolliffe, I. T. (2002). Principal Component Analysis (2nd ed.). Springer. https://doi.org/10.1007/b98835
+
+5. KL Divergence (Kullback-Leibler Divergence)
+
+Mathematical Foundation:
+KL Divergence measures the “distance” between two probability distributions  P  and  Q . 
+
+In drift detection, consecutive data windows are treated as distributions  P  and  Q . If  D_{KL}  exceeds a threshold, it indicates drift.
+
+How it Works:
+	1.	Divide data into consecutive windows.
+	2.	Estimate the probability distributions of each window.
+	3.	Compute KL Divergence between successive windows. If the divergence exceeds a threshold, drift is detected.
+
+Reference:
+Kullback, S., & Leibler, R. A. (1951). On Information and Sufficiency. Annals of Mathematical Statistics, 22(1), 79–86. https://doi.org/10.1214/aoms/1177729694
+
+
